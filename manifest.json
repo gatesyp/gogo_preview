@@ -1,0 +1,49 @@
+{
+  "name": "LinkedIn Preview Extension",
+  "version": "1.0",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com https://maxcdn.bootstrapcdn.com/; object-src 'self'",
+  "description": "Hover over any LinkedIn profile URL, and see a preview without having to open a new tab!",
+  "permissions": [
+    "activeTab", 
+    "declarativeContent", 
+    "storage", 
+    "tabs", 
+    "http://*/", 
+    "https://*/", 
+    "<all_urls>", 
+    "background",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "icons": {
+    "16": "images/get_started16.png",
+    "32": "images/get_started32.png",
+    "48": "images/get_started48.png",
+    "128": "images/get_started128.png"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "offline_enabled": true,
+  "content_scripts": [
+    {
+      "matches": [
+          "http://*/*",
+          "https://*/*"
+      ],
+      "js":     [
+        "content.js",
+        "jquery.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_title": "LinkedIn Preview Extension",
+    "default_popup": "popup/popup.html"
+  },
+  "web_accessible_resources": [
+    "previewpage.css"
+  ]
+}
